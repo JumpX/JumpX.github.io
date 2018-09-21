@@ -79,13 +79,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jungle blogs">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="###前言 ####YYModel ：一个非常轻量级的 JSON 模型自动转换库，代码风格良好且思路清晰，可以从源码中看到作者对 Runtime 深厚的理解。难能可贵的是 YYModel 在其轻量级的代码下还保留着自动类型转换，类型安全，无侵入等特性，并且具有接近手写解析代码的超高性能。 一、先从objc4说起####Class 123456789101112struct objc_class &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="YYModel解读">
+<meta property="og:url" content="http://yoursite.com/2018/09/20/YYModel解读/index.html">
 <meta property="og:site_name" content="Jungle blogs">
+<meta property="og:description" content="###前言 ####YYModel ：一个非常轻量级的 JSON 模型自动转换库，代码风格良好且思路清晰，可以从源码中看到作者对 Runtime 深厚的理解。难能可贵的是 YYModel 在其轻量级的代码下还保留着自动类型转换，类型安全，无侵入等特性，并且具有接近手写解析代码的超高性能。 一、先从objc4说起####Class 123456789101112struct objc_class &amp;">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-21T02:28:22.747Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jungle blogs">
+<meta name="twitter:title" content="YYModel解读">
+<meta name="twitter:description" content="###前言 ####YYModel ：一个非常轻量级的 JSON 模型自动转换库，代码风格良好且思路清晰，可以从源码中看到作者对 Runtime 深厚的理解。难能可贵的是 YYModel 在其轻量级的代码下还保留着自动类型转换，类型安全，无侵入等特性，并且具有接近手写解析代码的超高性能。 一、先从objc4说起####Class 123456789101112struct objc_class &amp;">
 
 
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/20/YYModel解读/"/>
 
 
 
 
 
-  <title>Jungle blogs</title>
+  <title>YYModel解读 | Jungle blogs</title>
   
 
 
@@ -140,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-right 
-  page-home">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/JumpX"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -244,9 +247,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -276,9 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/20/YYModel解读/" itemprop="url">YYModel解读</a></h1>
+          <h1 class="post-title" itemprop="name headline">YYModel解读</h1>
         
 
         <div class="post-meta">
@@ -328,9 +329,7 @@
       
 
       
-        
-          
-            <p>###前言</p>
+        <p>###前言</p>
 <p>####<a href="https://github.com/ibireme/YYModel" target="_blank" rel="noopener">YYModel</a> ：一个非常轻量级的 JSON 模型自动转换库，代码风格良好且思路清晰，可以从源码中看到作者对 Runtime 深厚的理解。难能可贵的是 YYModel 在其轻量级的代码下还保留着自动类型转换，类型安全，无侵入等特性，并且具有接近手写解析代码的超高性能。</p>
 <h3 id="一、先从objc4说起"><a href="#一、先从objc4说起" class="headerlink" title="一、先从objc4说起"></a>一、先从<a href="https://opensource.apple.com/tarballs/objc4/" target="_blank" rel="noopener">objc4</a>说起</h3><p>####Class</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">struct objc_class &#123;</span><br><span class="line">	Class isa  OBJC_ISA_AVAILABILITY;</span><br><span class="line">	Class super_class;</span><br><span class="line">	const char *name;</span><br><span class="line">	long version;</span><br><span class="line">	long info;</span><br><span class="line">	long instance_size;</span><br><span class="line">	struct objc_ivar_list *ivars;</span><br><span class="line">	struct objc_method_list **methodLists;</span><br><span class="line">	struct objc_cache *cache;</span><br><span class="line">	struct objc_protocol_list *protocols;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -536,8 +535,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//实现的伪代码...</span><br><span class="line">id objc_msgSend(id self, SEL op, ...) &#123;</span><br><span class="line">   if (!self) return nil;</span><br><span class="line">   //关键代码</span><br><span class="line">   IMP imp = class_getMethodImplementation(self-&gt;isa, SEL op);</span><br><span class="line">   imp(self, op, ...); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>#####以上大概就是json-to-model整个过程</p>
 
-          
-        
       
     </div>
     
@@ -554,12 +551,28 @@
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/06/关于内存、外存储器、磁盘、硬盘、软盘、光盘的区别/" rel="next" title="关于内存、外存储器、磁盘、硬盘、软盘、光盘的区别">
+                <i class="fa fa-chevron-left"></i> 关于内存、外存储器、磁盘、硬盘、软盘、光盘的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -569,14 +582,11 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -584,6 +594,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -604,8 +618,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -651,6 +674,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、先从objc4说起"><span class="nav-number">1.</span> <span class="nav-text">一、先从objc4说起</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、YYModel文件目录"><span class="nav-number">2.</span> <span class="nav-text">二、YYModel文件目录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-JSON转Model分三个步骤："><span class="nav-number">2.1.</span> <span class="nav-text">1.JSON转Model分三个步骤：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-具体分析-dictionary-转换-Model"><span class="nav-number">2.2.</span> <span class="nav-text">2.具体分析 dictionary 转换 Model</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#YYModelPropertyMeta"><span class="nav-number">2.2.1.</span> <span class="nav-text">_YYModelPropertyMeta</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -810,6 +849,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
